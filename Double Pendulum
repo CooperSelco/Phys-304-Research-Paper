@@ -1,30 +1,23 @@
-%--------------------------------------------------------------------------
-%-------------- Double Pendulum--------------------------------------------
-%--------------------------------------------------------------------------
-
 clc
 close all
 clear all
 
-%---------Parameters------------------------------------------------------
+l1=1; %length of string 1
+l2=2; %length of string 2
+m1=2; %mass of m1
+m2=1; %mass of m2
+g=9.8; %gravity
 
-l1=1; 
-l2=2 ; 
-m1=2 ; 
-m2=1; 
-g=9.8;
+tspan=50; %length of time we solve equations for 
+theta1=1.6; %initial value of theta 1
+theta1_prime=0; %set initial value of theta 1 dot equal to zero
+theta2=2.2; %initial value of theta 2
+theta2_prime=0; %set initial value of theta 2 dot equal to zero
 
-%---------initial condition-----------------------------------------------
+y0=[theta1 theta1_prime theta2 theta2_prime]; %put initial conditions into a vector
+[t1,a]=ode45(@pend, [0 ,tspan],y0); %use ode45 to solve differential equations with intial conditions y0 and for length of time tspan
 
-tspan=50;
-theta1=1.6;
-theta1_prime=0;
-theta2=2.2;
-theta2_prime=0;
-
-y0=[theta1 theta1_prime theta2 theta2_prime];
-[t1,a]=ode45(@pend, [0 ,tspan],y0);
-
+%same thing as before, but this time the initial value of theta 2 is 0.001 degrees bigger
 tspan=50;
 theta3=1.6;
 theta3_prime=0;
@@ -34,6 +27,7 @@ theta4_prime=0;
 y0=[theta3 theta3_prime theta4 theta4_prime];
 [t2,b]=ode45(@pend, [0 ,tspan],y0);
 
+%same thing as before, but this time the initial value of theta 2 is 0.001 degrees bigger than the last time
 tspan=50;
 theta5=1.6;
 theta5_prime=0;
@@ -43,9 +37,7 @@ theta6_prime=0;
 y0=[theta5 theta5_prime theta6 theta6_prime];
 [t3,c]=ode45(@pend, [0 ,tspan],y0);
 
-
-%---position of mass 1 and mass 2----------------------------------------
-
+%for each case, solve for the x and y cooridnates of m1 and m2 by using the values of l1, l2, theta1, and theta2
 x1=l1*sin(a(:,1));
 y1=-l1*cos(a(:,1));
 x2=l1*sin(a(:,1))+l2*sin(a(:,3));
@@ -61,8 +53,7 @@ y5=-l1*cos(c(:,1));
 x6=l1*sin(c(:,1))+l2*sin(c(:,3));
 y6=-l1*cos(c(:,1))-l2*cos(c(:,3));
 
-%------visualizing the result---------------------------------------------
-
+%plot y vs. x for each of the cases
 plot(x2,y2,'r','linewidth',0.3,'DisplayName','54')
 hold on
 plot(x4,y4,'g','linewidth',0.3,'DisplayName','54.001')
