@@ -1,0 +1,20 @@
+clear all
+clc 
+close all
+
+p = [10; 28; 8/3]; %sigma; rho; beta
+x_0 = [0; 1; 20];
+tspan = 0:0.001:100;
+
+[t,x] = ode45(@(t,x)diff_eqs(t,x,p),tspan,x_0);
+
+figure(1)
+plot3(x(:,1),x(:,2),x(:,3));
+xlabel('x','FontSize',20);
+ylabel('y','FontSize',20);
+zlabel('z','FontSize',20);
+
+figure(2)
+plot(x(:,1),x(:,3));
+xlabel('x','FontSize',20);
+ylabel('z','FontSize',20);
