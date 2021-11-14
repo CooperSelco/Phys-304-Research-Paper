@@ -1,0 +1,35 @@
+clear all
+clc
+close all
+
+r0 = 2;
+for j = 1:10000
+    x0(j) = j/10000;
+    y0(j) = r0*x0(j)*(1-x0(j));
+end
+
+r1 = 3;
+for j = 1:10000
+    x1(j) = j/10000;
+    y1(j) = r1*x1(j)*(1-x1(j));
+end
+ 
+r2 = 3.4;
+for j = 1:10000
+    x2(j) = j/10000;
+    y2(j) = r2*x2(j)*(1-x2(j));
+end
+ 
+r3 = 3.8;
+for j = 1:10000
+    x3(j) = j/10000;
+    y3(j) = r3*x3(j)*(1-x3(j));
+end 
+
+x4 = linspace(0,1,10000);
+y4 = x4;
+
+plot(x0,y0,x3,y3,x4,y4);
+ylabel('x_{n+1}', 'FontSize', 20);
+xlabel('x_n', 'FontSize', 20);
+legend('r = 2', 'r = 3.8', 'line y = x', 'FontSize', 25);
