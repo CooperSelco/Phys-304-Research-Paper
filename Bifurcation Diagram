@@ -1,0 +1,27 @@
+clear all
+clc 
+close all
+
+for i = 1:4000
+    r = i/1000;
+    x_0 = 0.5;
+    for j = 1:2000
+        x = r*x_0*(1-x_0);
+        x_0 = x;
+    end
+    xss = x;
+    for j = 1:1000
+        x = r*x_0*(1-x_0);
+        x_eq(i,j) = x;
+        r_vector(i,j) = r; 
+        x_0 = x;
+        if (abs(xss-x) < 0.001)
+            break
+        end
+    end
+end
+
+plot(r_vector,x_eq,'.','color',[0 0.447 0.741],'LineWidth',0.1,'MarkerSize',2.5);
+xlabel('r', 'FontSize', 20);
+ylabel('Equilibirum Values', 'FontSize', 20);
+xlim([3.4 4]);
