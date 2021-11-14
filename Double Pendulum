@@ -1,0 +1,76 @@
+%--------------------------------------------------------------------------
+%-------------- Double Pendulum--------------------------------------------
+%--------------------------------------------------------------------------
+
+clc
+close all
+clear all
+
+%---------Parameters------------------------------------------------------
+
+l1=1; 
+l2=2 ; 
+m1=2 ; 
+m2=1; 
+g=9.8;
+
+%---------initial condition-----------------------------------------------
+
+tspan=50;
+theta1=1.6;
+theta1_prime=0;
+theta2=2.2;
+theta2_prime=0;
+
+y0=[theta1 theta1_prime theta2 theta2_prime];
+[t1,a]=ode45(@pend, [0 ,tspan],y0);
+
+tspan=50;
+theta3=1.6;
+theta3_prime=0;
+theta4=2.2+0.0001745;
+theta4_prime=0;
+
+y0=[theta3 theta3_prime theta4 theta4_prime];
+[t2,b]=ode45(@pend, [0 ,tspan],y0);
+
+tspan=50;
+theta5=1.6;
+theta5_prime=0;
+theta6=2.2+0.0001745+0.0001745;
+theta6_prime=0;
+
+y0=[theta5 theta5_prime theta6 theta6_prime];
+[t3,c]=ode45(@pend, [0 ,tspan],y0);
+
+
+%---position of mass 1 and mass 2----------------------------------------
+
+x1=l1*sin(a(:,1));
+y1=-l1*cos(a(:,1));
+x2=l1*sin(a(:,1))+l2*sin(a(:,3));
+y2=-l1*cos(a(:,1))-l2*cos(a(:,3));
+
+x3=l1*sin(b(:,1));
+y3=-l1*cos(b(:,1));
+x4=l1*sin(b(:,1))+l2*sin(b(:,3));
+y4=-l1*cos(b(:,1))-l2*cos(b(:,3));
+
+x5=l1*sin(c(:,1));
+y5=-l1*cos(c(:,1));
+x6=l1*sin(c(:,1))+l2*sin(c(:,3));
+y6=-l1*cos(c(:,1))-l2*cos(c(:,3));
+
+%------visualizing the result---------------------------------------------
+
+plot(x2,y2,'r','linewidth',0.3,'DisplayName','54')
+hold on
+plot(x4,y4,'g','linewidth',0.3,'DisplayName','54.001')
+hold on
+plot(x6,y6,'b','linewidth',0.3,'DisplayName','54.002')
+xlabel('X','fontSize',14);
+ylabel('Y','fontSize',14);
+
+lgd = legend;
+lgd.FontSize = 8;
+lgd.Title.String = 'Initial Value of \theta_2 in Degrees';
