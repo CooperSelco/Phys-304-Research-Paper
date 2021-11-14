@@ -2,12 +2,15 @@ clear all
 clc
 close all
 
-r = 3.8;
+r = 3.8; %r value
+
+%solve discrete logistic equation 10,000 times
 for j = 1:10000
     x(j) = j/10000;
     y(j) = r*x(j)*(1-x(j));
 end
  
+%plot x_n+1 vs. x_n
 plot(x,y);
 ylabel('x_{n+1}', 'FontSize', 20);
 xlabel('x_n', 'FontSize', 20);
