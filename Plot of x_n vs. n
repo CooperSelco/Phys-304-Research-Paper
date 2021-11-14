@@ -1,0 +1,16 @@
+clear all
+clc
+close all
+
+x(1) = 0.5;
+r = 3.8;
+N = 1000;
+
+for j = 1:N-1
+    x(j+1) = r*x(j)*(1-x(j));
+end
+
+plot(linspace(1,N,N),x);
+xlabel('Number of Iterations', 'FontSize', 20);
+ylabel('Value of x', 'FontSize', 20);
+ylim([0 1]);
