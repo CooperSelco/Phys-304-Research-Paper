@@ -1,0 +1,13 @@
+clear all
+clc
+close all
+
+r = 3.8;
+for j = 1:10000
+    x(j) = j/10000;
+    y(j) = r*x(j)*(1-x(j));
+end
+ 
+plot(x,y);
+ylabel('x_{n+1}', 'FontSize', 20);
+xlabel('x_n', 'FontSize', 20);
