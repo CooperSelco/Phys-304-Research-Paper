@@ -2,23 +2,27 @@ clear all
 clc
 close all
 
-r = 3.8285;
+r = 3.8285; %r value
 for j = 1:10000
-    x(j) = j/10000;
-    y(j) = r*x(j)*(1-x(j));
-    z(j) = r*y(j)*(1-y(j));
-    w(j) = r*z(j)*(1-z(j));
+    x(j) = j/10000; %values of x_n
+    y(j) = r*x(j)*(1-x(j)); %values of x_n+1
+    z(j) = r*y(j)*(1-y(j)); %values of x_n+2
+    w(j) = r*z(j)*(1-z(j)); %values of x_n+3
 end
  
+%line y = x
 x2 = linspace(0,1,10000);
 y2 = x2;
 
+%trivial equilibrium point
 x3 = [0.7388];
 y3 = x3;
 
+%nontrivial equilibrium points
 x4 = [0.1603,0.515252,0.956296];
 y4 = x4;
 
+%plot x_n+3 vs. x_n, the line y = x, and all of the equilibrium points
 plot(x,w,x2,y2);
 hold on
 scatter(x3,y3,'filled','MarkerFaceColor',[1 0 0]);
