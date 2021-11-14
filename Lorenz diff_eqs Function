@@ -1,5 +1,6 @@
 function dx = diff_eqs(t,x,p)
 
+%the lorenz equations, where x(i) is the ith element of a vector containing x, y, and z, and p(i) is the ith element of a vector containing the parameters sigma, rho, and beta
 dx = [
     p(1)*(x(2)-x(1));
     x(1)*(p(2)-x(3)) - x(2);
