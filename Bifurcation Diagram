@@ -2,20 +2,21 @@ clear all
 clc 
 close all
 
+%first loop iterates through different values of r
 for i = 1:4000
-    r = i/1000;
-    x_0 = 0.5;
-    for j = 1:2000
+    r = i/1000; %r starts at 0.001 and increases by 0.001 with each iteration of the loop until reaching 4
+    x_0 = 0.5; %initial value of x_n
+    for j = 1:2000 %solve discrete logistic equation 2000 times to get rid of transient behavior
         x = r*x_0*(1-x_0);
         x_0 = x;
     end
-    xss = x;
-    for j = 1:1000
+    xss = x; %set variable xss (x_steadystate) equal to the last value of x, later compare xss with x_n to see if x_n is changing or not
+    for j = 1:10000 %solve dsicrete logistic equation 10,000 more times
         x = r*x_0*(1-x_0);
-        x_eq(i,j) = x;
-        r_vector(i,j) = r; 
+        x_eq(i,j) = x; %collect different values of x_n for each value of r
+        r_vector(i,j) = r; %collect r values that correspind to x_n values collected in previous line
         x_0 = x;
-        if (abs(xss-x) < 0.001)
+        if (abs(xss-x) < 0.001) %if xss is equal to x_n, stop solving discrete logistic equation for this value of r
             break
         end
     end
