@@ -2,28 +2,30 @@ clear all
 clc 
 close all
 
-r = 3.2; %r-value
-x(1) = 0.2; %initial x-value
-N = 200; %number of iterations
+r = 3.2; %r value
+x(1) = 0.2; %initial value of x_n (= x_0)
+N = 200; %number of iterations 
 
 for j = 1:N
-    x(j+1) = r*x(j)*(1-x(j));
-    plot([x(j),x(j)], [x(j), x(j+1)], 'color', 'r');
-    xlim([0 1]);
+    x(j+1) = r*x(j)*(1-x(j)); %solve discrete logistic equation
+    plot([x(j),x(j)], [x(j), x(j+1)], 'color', 'r'); %draw vertical line from (x_n, x_n) on y = x to (x_n, x_n+1) on curve x_n+1 vs. x_n
     ylim([0 1]);
     ylabel('x_{n+1}', 'FontSize', 20');
     xlabel('x_n', 'FontSize', 20');
     hold on
-    plot([x(j),x(j+1)], [x(j+1),x(j+1)], 'color', 'r');
+    plot([x(j),x(j+1)], [x(j+1),x(j+1)], 'color', 'r'); %draw horizontal line from (x_n, x_n+1) on curve x_n+1 vs. x_n to (x_n+1, x_n+1) on line y = x
     xlim([0 1]);
     ylim([0 1]);
     hold on
 end
 
+%plot curve x_n+1 vs. x_n
 for j = 1:10000
     a(j) = j/10000;
     b(j) = r*a(j)*(1-a(j));
 end
+
+%plot line y = x
 plot(a,b,'color','b');
 hold on
 c = linspace(0,1,10000);
