@@ -2,18 +2,20 @@ clear all
 clc 
 close all
 
-p = [10; 28; 8/3]; %sigma; rho; beta
-x_0 = [0; 1; 20];
-tspan = 0:0.001:100;
+p = [10; 28; 8/3]; %put parameters sigma, rho, and beta into a vector to use them in ode45
+x_0 = [0; 1; 20]; %put initial conditions into a vector to use them in ode45
+tspan = 0:0.001:100; %length of time we will solve differential equations for
 
-[t,x] = ode45(@(t,x)diff_eqs(t,x,p),tspan,x_0);
+[t,x] = ode45(@(t,x)diff_eqs(t,x,p),tspan,x_0); %use ode45 to solve Lorenz equations with initial conditions x_0 and for length of time tspan
 
+%plot x vs. y vs. z
 figure(1)
 plot3(x(:,1),x(:,2),x(:,3));
 xlabel('x','FontSize',20);
 ylabel('y','FontSize',20);
 zlabel('z','FontSize',20);
 
+%plot x vs. z
 figure(2)
 plot(x(:,1),x(:,3));
 xlabel('x','FontSize',20);
